@@ -10,7 +10,7 @@ DATA_PATH = '../Dataset/300x300Data.npz'
 
 
 def train(x_data, y_data):
-    clf = KNeighborsClassifier(n_neighbors=15)
+    clf = KNeighborsClassifier(n_neighbors=30)
 
     clf.fit(x_data, y_data)
     save_model(clf)

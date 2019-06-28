@@ -1,7 +1,9 @@
 from sklearn.tree import DecisionTreeClassifier
+from sklearn.tree import export_graphviz
 from sklearn.externals import joblib
 from sklearn.metrics import classification_report
 from sklearn.preprocessing import StandardScaler
+import pydot
 import time
 import numpy as np
 import os
@@ -39,6 +41,15 @@ def save_report(ytest, ypred, train_time, test_time):
     report_file.close()
 
 
+def export():
+    tree = load_model()
+    export_graphviz(tree, out_file="tree.dot",
+                    impurity=False,
+                    filled=True)
+    (graph,) = pydot.graph_from_dot_file('tree.dot')
+    graph.write_png('tree.png')
+
+
 def test(x_test, y_test, train_time):
     clf = load_model()
 
@@ -63,7 +74,7 @@ if __name__ == '__main__':
     x_test = scaler.transform(x_test)
 
     st = time.clock()
-    train(x_data, y_data)
+    #train(x_data, y_data)
     et = time.clock()
 
-    test(x_test, y_test, et-st)
+    #test(x_test, y_test, et-st)

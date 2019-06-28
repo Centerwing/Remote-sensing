@@ -10,7 +10,7 @@ DATA_PATH = '../Dataset/300x300Data.npz'
 
 
 def train(x_data, y_data):
-    clf = SVC(decision_function_shape='ovo')
+    clf = SVC(kernel='linear', decision_function_shape='ovo')
 
     clf.fit(x_data, y_data)
     save_model(clf)
